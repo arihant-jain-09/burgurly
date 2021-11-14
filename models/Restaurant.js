@@ -17,6 +17,7 @@ const restaurantSchema=new mongoose.Schema({
       }
     },
     _menu: [{_id: {type:mongoose.Schema.Types.ObjectId},name:String}],
+    image:String,
 })
 
 mongoose.model('restaurants',restaurantSchema);
