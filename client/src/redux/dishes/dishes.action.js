@@ -6,3 +6,10 @@ export const fetchDishes=(category)=>{
         dispatch({type:'FETCH_DISHES',payload:data})
     }
 }
+
+export const setdishsection=(dishsection)=>{
+  return{
+      type:"SET_DISH_SECTION",
+      payload:dishsection
+  }
+}
