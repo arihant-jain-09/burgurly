@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch} from 'react-redux'
 import Button from '../../../global/components/Button/Button';
-import { setCurrentPage } from '../../../redux/currentpage/currentPage.action';
+import { setCurrentPage } from '../../../global/redux/currentpage/currentPage.action';
 import {ReactComponent as Google} from '../../../assets/google.svg';
 import './Login.scss'
 import { useHistory } from 'react-router';

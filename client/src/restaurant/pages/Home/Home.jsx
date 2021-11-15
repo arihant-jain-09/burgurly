@@ -1,9 +1,8 @@
 import React from 'react'
 import styled,{css} from 'styled-components'
-import Dishes from '../../../global/components/Dishes/Dishes'
 import {useDispatch, useSelector} from 'react-redux';
 import MenuCard from '../../components/MenuCard/MenuCard';
-import { setdishsection } from '../../../redux/dishes/dishes.action';
+import { setdishsection } from '../../../global/redux/dishes/dishes.action';
 import './Home.scss';
 const PseudoClass=css`
     color:#ea7c69;
@@ -39,19 +38,6 @@ const HomePartner = () => {
                 <StyledItem section={currentSection} name="appetizer" onClick={()=>dispatch(setdishsection("appetizer"))}>Appetizer</StyledItem>
                 <StyledItem section={currentSection} name="dessert" onClick={()=>dispatch(setdishsection("dessert"))}>Dessert</StyledItem>
             </div>
-            {user?.type==='customer' ? 
-            <>
-            <div className="homePartner__heading heading-2">Choose Dishes</div>
-            <div className="homePartner__overflowfix">
-                <div className="homePartner__dishes">
-                    {user && !!user[currentSection] && user[currentSection].dishes.map((dish,index)=>{
-                        return <Dishes key={index} dish={dish} />
-                    })}
-                </div>
-            </div>
-            </>
-            :
-            <>
             <div className="homePartner__heading heading-2">Avaialble Dishes</div>
             <div className="homePartner__overflowfix">
                 <div className={`${user?.type==='Partner' && 'homePartner__dishes--partner'} homePartner__dishes`}>
@@ -63,8 +49,6 @@ const HomePartner = () => {
                 })}
                 </div>
             </div>
-            </>
-            }
 
             
         </div>

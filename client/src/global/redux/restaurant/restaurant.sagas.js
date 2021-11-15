@@ -3,9 +3,12 @@ import { setCurrentPage } from "../currentpage/currentPage.action";
 import { fetchDishes } from "../dishes/dishes.action";
 
 export const current = (state) => state.category?.dishsection;
+export const resInfo= (state) => state.restaurants?.resInfo;
 
 export function* FetchDishes(){
     let currentSection = yield select(current);
+    let resDetail=yield select(resInfo);
+    if(currentSection!==null && resDetail!==null)
     yield put(fetchDishes(currentSection));
 }
 

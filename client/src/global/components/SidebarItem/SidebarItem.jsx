@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPage } from '../../../redux/currentpage/currentPage.action';
+import { setCurrentPage } from '../../../global/redux/currentpage/currentPage.action';
 import {useHistory} from 'react-router-dom'
 import './SidebarItem.scss'
 const SidebarItem = ({children}) => {

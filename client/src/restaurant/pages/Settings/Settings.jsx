@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import './Settings.scss';
 import {ReactComponent as Business} from '../../../assets/business.svg'
 import {ReactComponent as Option} from '../../../assets/Option.svg'
@@ -6,47 +6,26 @@ import {ReactComponent as Add} from '../../../assets/Add.svg'
 import Button from '../../../global/components/Button/Button';
 import styled,{css} from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPage } from '../../../redux/currentpage/currentPage.action';
+import { setCurrentPage } from '../../../global/redux/currentpage/currentPage.action';
 import MenuCard from '../../components/MenuCard/MenuCard';
 import { Dialog } from "@material-ui/core";
 import MenuAddForm from '../../components/MenuAddForm/MenuAddForm';
-import { fetchUser } from '../../../redux/auth/auth.action';
-import { fetchDishes } from '../../../redux/dishes/dishes.action';
 import axios from 'axios';
 
-const Settings = () => {
-  const currentPartnerInfo = useSelector((state)=> state.restaurants.resInfo);
-  const [name,setName]=useState('');
-  const [address,setAddress]=useState('');
-  const [latitude,setLatitude]=useState();
-  const [longitude,setLongitude]=useState();
+const Settings = ({currentPartnerInfo}) => {
+  
+  const [name,setName]=useState(currentPartnerInfo?.RestaurantName);
+  const [address,setAddress]=useState(currentPartnerInfo?.RestaurantAddress);
+  const [latitude,setLatitude]=useState(currentPartnerInfo?.location.coordinates[0]);
+  const [longitude,setLongitude]=useState(currentPartnerInfo?.location.coordinates[1]);
   const [side,setSide]=useState('info');
   const [open,setopen]=useState(false);
-  const [image,setImage]=useState();
+  const [image,setImage]=useState(currentPartnerInfo?.image);
   const category=useSelector((state)=>state.category?.dishes);
-
-  useEffect(() => {
-    setName(currentPartnerInfo?.RestaurantName);
-    setAddress(currentPartnerInfo?.RestaurantAddress);
-    setLatitude(currentPartnerInfo?.location.coordinates[0]);
-    setLongitude(currentPartnerInfo?.location.coordinates[1]);
-    setImage(currentPartnerInfo?.image);
-    return () => {
-      
-    }
-  }, [currentPartnerInfo])
   const dispatch = useDispatch();
 
   const [currentSection,setCurrentSection]=useState('MainCourse');
   
-  useEffect(() => {
-    //remove this fectch User
-    dispatch(fetchUser());
-    dispatch(fetchDishes(currentSection));
-    return () => {
-      
-    }
-  }, [currentSection,open,dispatch])
 
   const StyledItem=styled.div`
     position: relative;

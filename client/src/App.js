@@ -4,9 +4,8 @@ import Sidebar from './global/pages/Sidebar/Sidebar.jsx';
 import Order from './global/pages/Order/Order.jsx';
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react';
-import { fetchUser } from './redux/auth/auth.action';
-import { setCurrentPage } from './redux/currentpage/currentPage.action';
-import { setdishsection } from './redux/dishes/dishes.action'; 
+import { fetchUser } from './global/redux/auth/auth.action';
+import { setCurrentPage } from './global/redux/currentpage/currentPage.action';
 import Dashboard from './global/pages/Dashboard/Dashboard.jsx';
 import CustomerLogin from './customer/pages/Login/Login';
 import RestaurantLogin from './restaurant/pages/Login/Login';
@@ -14,22 +13,20 @@ import { Redirect, Route, Switch } from 'react-router';
 import Settings from './restaurant/pages/Settings/Settings.jsx';
 import HomePartner from './restaurant/pages/Home/Home.jsx';
 import HomeCustomer from './customer/pages/Home/Home.jsx';
-import { getRestaurantDetails } from './redux/restaurant/restaurant.actions';
 function App() {
   const dispatch = useDispatch();
   const user=useSelector((state)=>state.auth?.user);
+  const currentPartnerInfo = useSelector((state)=> state.restaurants?.resInfo);
  
   useEffect(() => {
-    dispatch(fetchUser());
-    dispatch(setCurrentPage("Home"));  
-    if(user?.type==="Partner"){
-      dispatch(getRestaurantDetails(user?._id));
-      dispatch(setdishsection("MainCourse"));
+    if(user==null){
+      dispatch(fetchUser());
     }
+    dispatch(setCurrentPage("Home"));  
     return () => {
       
     }
-  }, [dispatch,user?._id,user?.type])
+  }, [dispatch,user])
 
   const TypeCustomer=()=>{
     return(
@@ -71,8 +68,6 @@ function App() {
   }
 
   const currentPage=useSelector((state)=>state.page.page);
-  
-  console.log(user?.type);
   return (
     <div className="app">
       {!user && <Redirect to='/'/>}
@@ -108,7 +103,7 @@ function App() {
         {currentPage==="Settings" && 
           <>
           <Header page="Settings"/>
-          <Settings/>
+          <Settings currentPartnerInfo={currentPartnerInfo}/>
           </>
         }
           </div>

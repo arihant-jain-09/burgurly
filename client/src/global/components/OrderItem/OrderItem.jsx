@@ -3,7 +3,7 @@ import Button from '../Button/Button'
 import {ReactComponent as Delete} from '../../../assets/Trash.svg'
 import {useDispatch} from 'react-redux';
 import './OrderItem.scss'
-import { addCartItem,deleteCartItem } from '../../../redux/Order/order.action';
+import { addCartItem,deleteCartItem } from '../../../customer/redux/Order/order.action';
 const OrderItem = ({item}) => {
     const dispatch = useDispatch();
     const totalprice=(item.quantity * item.price).toFixed(2);

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import styled,{css} from 'styled-components'
 import {useDispatch, useSelector} from 'react-redux';
-import { setdishsection } from '../../../redux/dishes/dishes.action'
+import { setdishsection } from '../../../global/redux/dishes/dishes.action'
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard'
-import { CurrentRestaurant, getMenu, getRestaurants } from '../../../redux/restaurant/restaurant.actions';
+import { CurrentRestaurant, getRestaurants } from '../../../global/redux/restaurant/restaurant.actions';
 import './Home.scss'
-import Dishes from '../../../global/components/Dishes/Dishes';
+import Dishes from '../../components/Dishes/Dishes';
 const PseudoClass=css`
     color:#ea7c69;
     &::after{
@@ -26,7 +26,7 @@ const StyledItem=styled.div`
 `
 const HomeCustomer = () => {
     const dispatch = useDispatch();
-    const currentSection=useSelector((state)=>state.dish?.dishsection);
+    const currentSection=useSelector((state)=>state.category?.dishsection);
     const restaurants=useSelector((state)=>state.restaurants);
     const dishes=restaurants?.dishes;
     useEffect(() => {
@@ -39,7 +39,6 @@ const HomeCustomer = () => {
     const fetchMenu=({id,address,name,location})=>{
         dispatch(CurrentRestaurant({id,address,name,location}));
         dispatch(setdishsection("MainCourse"));
-        dispatch(getMenu({id,menuName:'MainCourse'}));
     }
     return (
         <div className="homeCustomer">
