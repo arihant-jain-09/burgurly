@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'burgurly'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3C294E5B9B0D484692628D0C0B0DFC6C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_59FFDE350F3E4309A99E17E2BD40F8B8 }}
           package: .
